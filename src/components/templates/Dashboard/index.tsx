@@ -1,4 +1,4 @@
-import { Sidebar } from '@/components/organisms';
+import { Navbar, Sidebar } from '@/components/organisms';
 
 export function DashboardLayout({
   children,
@@ -7,13 +7,13 @@ export function DashboardLayout({
 }>) {
   return (
     <div className="w-full">
-      <div className="h-[80px] md:pl-56 fixed inset-y-0 w-full z-50">
-        {/* <Navbar /> */}
+      <div className="h-[80px] md:pl-60 fixed inset-y-0 w-full z-50">
+        <Navbar />
       </div>
-      <div className="hidden md:flex h-full w-56 flex-col fixed inset-y-0 z-50">
+      <div className="hidden md:flex h-full w-60 flex-col fixed inset-y-0 z-50">
         <Sidebar />
       </div>
-      <main className="md:ml-56 pt-[80px] h-full">{children}</main>
+      <main className="md:ml-60 pt-[80px] h-full">{children}</main>
     </div>
   );
 }

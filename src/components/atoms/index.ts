@@ -4,3 +4,4 @@ export * from './Input';
 export * from './SidebarItem';
 export * from './SidebarLabel';
 export * from './Separator';
+export * from './Avatar';

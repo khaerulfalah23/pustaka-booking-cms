@@ -17,7 +17,7 @@ export function SidebarRoutes() {
               href={item.href}
             />
           ))}
-          <Separator className="my-2 w-[78%] mx-auto" />
+          <Separator className="my-2 w-[85%] md:w-[80%] mx-auto" />
         </div>
       ))}
     </div>
