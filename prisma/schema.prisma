@@ -8,18 +8,23 @@ datasource db {
 }
 
 model User {
-  id            String   @id @default(cuid())
-  nama          String
-  alamat        String
-  email         String   @unique
-  password      String
-  image         String
-  role          Role     @default(USER)
-  is_active     Int
-  tanggal_input DateTime @default(now())
+  id           String   @id @default(cuid())
+  name         String
+  address      String?
+  email        String   @unique
+  password     String
+  image        String?  @default("default.svg")
+  role         Role     @default(user)
+  is_active    IsActive @default(nonactive)
+  date_created DateTime @default(now())
 }
 
 enum Role {
-  USER
-  ADMIN
+  user
+  admin
+}
+
+enum IsActive {
+  active
+  nonactive
 }

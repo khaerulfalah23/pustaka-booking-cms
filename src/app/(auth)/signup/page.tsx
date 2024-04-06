@@ -10,17 +10,30 @@ import {
 } from '@/components/molecules';
 import { signUpFormSchema } from '@/lib/form-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import Link from 'next/link';
+import { toast } from 'sonner';
 
 const SignUpPage = () => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),
   });
 
   const onSubmit = async (val: z.infer<typeof signUpFormSchema>) => {
-    console.log(val);
+    const response = await fetch('/api/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(val),
+    });
+    if (response.status === 200) {
+      router.push('/signin');
+      toast.success('Sign Up Success, Please Sign In');
+    } else {
+      toast.error('Email Already Exists');
+    }
   };
 
   return (
