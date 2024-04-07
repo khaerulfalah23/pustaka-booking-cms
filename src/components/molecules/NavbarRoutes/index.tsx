@@ -33,9 +33,12 @@ export function NavbarRoutes() {
             <span>Profile</span>
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer">
+          <DropdownMenuItem
+            onClick={() => signOut()}
+            className="cursor-pointer"
+          >
             <LogOut className="mr-2 h-4 w-4" />
-            <button onClick={() => signOut()}>Log out</button>
+            <span>Log out</span>
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuContent>

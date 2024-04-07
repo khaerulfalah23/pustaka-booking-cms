@@ -35,7 +35,9 @@ const authOptions: NextAuthOptions = {
           user.password
         );
 
-        if (isMatch) {
+        const isAdmin = user.role === 'admin';
+
+        if (isMatch && isAdmin) {
           return user;
         }
 

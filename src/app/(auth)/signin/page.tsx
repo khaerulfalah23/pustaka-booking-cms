@@ -15,7 +15,6 @@ import { useForm } from 'react-hook-form';
 import { signIn } from 'next-auth/react';
 import { toast } from 'sonner';
 import { z } from 'zod';
-import Link from 'next/link';
 
 const SignInPage = () => {
   const router = useRouter();
@@ -42,7 +41,7 @@ const SignInPage = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-80">
         <div className="rounded-xl border bg-card text-card-foreground shadow p-5">
           <div className="font-semibold text-center text-2xl mb-2">Login</div>
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-gray-500 text-center">
             Enter your email to gain access
           </div>
 
@@ -80,12 +79,6 @@ const SignInPage = () => {
                 )}
               />
               <Button className=" w-full">Sign In</Button>
-              <div className="text-sm">
-                Don`t have an account{' '}
-                <Link href="/signup" className="text-primary">
-                  Sign Up
-                </Link>
-              </div>
             </form>
           </Form>
         </div>
