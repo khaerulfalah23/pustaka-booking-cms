@@ -10,17 +10,31 @@ import {
 } from '@/components/molecules';
 import { signInFormSchema } from '@/lib/form-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { signIn } from 'next-auth/react';
+import { toast } from 'sonner';
 import { z } from 'zod';
+import Link from 'next/link';
 
 const SignInPage = () => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof signInFormSchema>>({
     resolver: zodResolver(signInFormSchema),
   });
 
   const onSubmit = async (val: z.infer<typeof signInFormSchema>) => {
-    console.log(val);
+    const authenticated = await signIn('credentials', {
+      ...val,
+      redirect: false,
+    });
+
+    if (authenticated?.error) {
+      toast.error('Email or Password maybe wrong');
+      return;
+    }
+
+    router.push('/');
   };
 
   return (

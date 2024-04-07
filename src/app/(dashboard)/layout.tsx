@@ -1,7 +1,10 @@
 import '../globals.css';
 import { DashboardLayout } from '@/components/templates/Dashboard';
 import type { Metadata } from 'next';
+import { getServerSession } from 'next-auth';
 import { Epilogue } from 'next/font/google';
+import { redirect } from 'next/navigation';
+import authOptions from '../api/auth/[...nextauth]/options';
 
 const epilogue = Epilogue({ subsets: ['latin'] });
 
@@ -15,6 +18,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession(authOptions);
+  if (session === null) {
+    return redirect('/signin');
+  }
   return (
     <html lang="en">
       <body suppressHydrationWarning={true} className={epilogue.className}>
