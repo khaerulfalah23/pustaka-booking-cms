@@ -5,6 +5,7 @@ import { getServerSession } from 'next-auth';
 import { Epilogue } from 'next/font/google';
 import { redirect } from 'next/navigation';
 import authOptions from '../api/auth/[...nextauth]/options';
+import NextAuthProvider from '@/context/NextAuthProvider';
 
 const epilogue = Epilogue({ subsets: ['latin'] });
 
@@ -18,7 +19,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession(authOptions);
+  const session: any = await getServerSession(authOptions);
   if (session === null) {
     return redirect('/signin');
   }
@@ -26,7 +27,9 @@ export default async function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning={true} className={epilogue.className}>
         <main>
-          <DashboardLayout>{children}</DashboardLayout>
+          <NextAuthProvider>
+            <DashboardLayout>{children}</DashboardLayout>
+          </NextAuthProvider>
         </main>
       </body>
     </html>
