@@ -41,7 +41,7 @@ const authOptions: NextAuthOptions = {
           return user;
         }
 
-        return null as any;
+        return null;
       },
     }),
   ],
@@ -50,28 +50,17 @@ const authOptions: NextAuthOptions = {
     newUser: '/signup',
   },
   callbacks: {
-    jwt({ token, user }) {
-      if (user) {
-        return {
-          ...token,
-          id: user.id,
-          role: user.role,
-          address: user.address,
-        };
+    jwt({ token, account, user }) {
+      if (account) {
+        token.id = user.id;
       }
 
       return token;
     },
     async session({ session, token }) {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.id,
-          role: token.role,
-          address: token.address,
-        },
-      };
+      session.user.id = token.id;
+
+      return session;
     },
   },
   session: {
