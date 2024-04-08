@@ -1,46 +1,49 @@
-'use client';
-
-import { LogOut, User } from 'lucide-react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/atoms';
+import { User } from 'lucide-react';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  NavbarLink,
+} from '@/components/atoms';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '..';
-import { signOut, useSession } from 'next-auth/react';
+import { supabaseGetPublicUrl } from '@/lib/supabase';
+import { getServerSession } from 'next-auth';
+import { Logout } from '../Logout';
+import authOptions from '@/app/api/auth/[...nextauth]/options';
+import prisma from '../../../../lib/prisma';
 
-export function NavbarRoutes() {
-  const { data: session } = useSession();
+export async function NavbarRoutes() {
+  const session = await getServerSession(authOptions);
+
+  const user = await prisma.user.findFirst({
+    where: { id: session?.user?.id },
+  });
+
+  const { publicUrl } = await supabaseGetPublicUrl(
+    user?.image as string,
+    'profile'
+  );
   return (
     <div className="flex items-center gap-x-2 ml-auto">
-      <h4 className="font-semibold capitalize">{session?.user.name}</h4>
+      <h4 className="capitalize">Hallo, {user?.name}</h4>
       <DropdownMenu>
         <DropdownMenuTrigger className="cursor-pointer" asChild>
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarImage src={publicUrl} />
             <AvatarFallback>AM</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="cursor-pointer">
-            <User className="mr-2 h-4 w-4" />
-            <span>Profile</span>
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => signOut()}
-            className="cursor-pointer"
-          >
-            <LogOut className="mr-2 h-4 w-4" />
-            <span>Log out</span>
-            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-          </DropdownMenuItem>
+          <NavbarLink title="Profile" shortcut="⇧⌘P" icon={<User className="mr-2 h-4 w-4" />} />
+          <Logout />
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
