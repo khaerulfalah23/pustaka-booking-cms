@@ -22,7 +22,7 @@ const SignInPage = () => {
     resolver: zodResolver(signInFormSchema),
   });
 
-  const { isSubmitting, isValid } = form.formState;
+  const { isSubmitting } = form.formState;
 
   const onSubmit = async (val: z.infer<typeof signInFormSchema>) => {
     const loadingToast = toast.loading('Loading...');
@@ -35,10 +35,12 @@ const SignInPage = () => {
         toast.error('Email or Password maybe wrong');
         return;
       }
-      toast.success('Login Success', { id: loadingToast });
       router.push('/');
+      toast.success('Login Success', { id: loadingToast });
     } catch (error) {
       toast.error('Something went wrong', { id: loadingToast });
+    } finally {
+      toast.dismiss(loadingToast);
     }
   };
   return (
@@ -83,7 +85,7 @@ const SignInPage = () => {
                   </FormItem>
                 )}
               />
-              <Button disabled={!isValid || isSubmitting} className=" w-full">
+              <Button disabled={isSubmitting} className=" w-full">
                 Sign In
               </Button>
             </form>

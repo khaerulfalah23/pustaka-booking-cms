@@ -36,7 +36,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({ detail }) => {
     },
   });
 
-  const { isSubmitting, isValid } = form.formState;
+  const { isSubmitting } = form.formState;
 
   const onSubmit = async (val: z.infer<typeof profileFormSchema>) => {
     const loadingToast = toast.loading('Saving...');
@@ -70,11 +70,12 @@ export const ProfileForm: FC<ProfileFormProps> = ({ detail }) => {
         toast.error('Please try again');
       }
 
-      router.refresh();
+      router.push('/profile');
     } catch (error) {
       toast.error('An error occurred. Please try again.');
       console.log(error);
     } finally {
+      router.refresh();
       toast.dismiss(loadingToast);
     }
   };
@@ -116,7 +117,7 @@ export const ProfileForm: FC<ProfileFormProps> = ({ detail }) => {
           >
             Cancel
           </Button>
-          <Button disabled={!isValid || isSubmitting}>Save</Button>
+          <Button disabled={isSubmitting}>Save</Button>
         </div>
       </form>
     </Form>
