@@ -18,20 +18,24 @@ const createId = (length: number) => {
   return result;
 };
 
-export const supabaseUploadProfilePicture = async (
+export const supabaseUploadFile = async (
   file: File | string,
-  bucket: 'profile'
+  bucket: 'profile' | 'book'
 ) => {
-  const fileName = createId(10);
+  const fileName = `${createId(6)}.jpg`;
 
   const { data, error } = await supabase.storage
     .from(bucket)
-    .update('public/' + fileName, file, {
-      cacheControl: '3600',
-      upsert: true,
+    .upload(fileName, file, {
+      cacheControl: '9000',
+      upsert: false,
     });
 
-  return { data, error, fileName };
+  return {
+    data,
+    error,
+    fileName,
+  };
 };
 
 export const supabaseGetPublicUrl = async (
@@ -42,5 +46,19 @@ export const supabaseGetPublicUrl = async (
 
   return {
     publicUrl: data.publicUrl,
+  };
+};
+
+export const supabaseDeleteFile = async (
+  fileName: string,
+  bucket: 'profile' | 'book'
+) => {
+  const { data, error } = await supabase.storage
+    .from(bucket)
+    .remove([fileName]);
+
+  return {
+    data,
+    error,
   };
 };

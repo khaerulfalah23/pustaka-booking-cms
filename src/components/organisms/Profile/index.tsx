@@ -1,4 +1,3 @@
-import authOptions from '@/app/api/auth/[...nextauth]/options';
 import {
   Avatar,
   AvatarFallback,
@@ -15,6 +14,7 @@ import {
 import { supabaseGetPublicUrl } from '@/lib/supabase';
 import { getServerSession } from 'next-auth';
 import { dateFormat } from '@/lib/utils';
+import authOptions from '@/app/api/auth/[...nextauth]/options';
 import prisma from '../../../../lib/prisma';
 import Link from 'next/link';
 

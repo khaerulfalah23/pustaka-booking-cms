@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { getServerSession } from 'next-auth';
 import { Epilogue } from 'next/font/google';
 import { redirect } from 'next/navigation';
+import { Toaster } from 'sonner';
 import authOptions from '../api/auth/[...nextauth]/options';
 import NextAuthProvider from '@/context/NextAuthProvider';
 
@@ -30,6 +31,7 @@ export default async function RootLayout({
           <NextAuthProvider>
             <DashboardLayout>{children}</DashboardLayout>
           </NextAuthProvider>
+          <Toaster position="top-right" richColors />
         </main>
       </body>
     </html>
