@@ -6,3 +6,6 @@ export * from './DropdownMenu';
 export * from './Card';
 export * from './CustomUpload';
 export * from './Logout';
+export * from './Table';
+export * from './DataTablePagination';
+export * from './CategoryColumns';

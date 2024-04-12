@@ -31,7 +31,7 @@ export async function NavbarRoutes() {
   );
   return (
     <div className="flex items-center gap-x-2 ml-auto">
-      <h4 className="capitalize">Hallo, {user?.name}</h4>
+      <h4 className="capitalize">Hello, {user?.name}</h4>
       <DropdownMenu>
         <DropdownMenuTrigger className="cursor-pointer" asChild>
           <Avatar>
@@ -42,7 +42,11 @@ export async function NavbarRoutes() {
         <DropdownMenuContent className="w-56">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <NavbarLink title="Profile" shortcut="⇧⌘P" icon={<User className="mr-2 h-4 w-4" />} />
+          <NavbarLink
+            title="Profile"
+            shortcut="⇧⌘P"
+            icon={<User className="mr-2 h-4 w-4" />}
+          />
           <Logout />
         </DropdownMenuContent>
       </DropdownMenu>
