@@ -21,18 +21,24 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/molecules';
+import { useRouter } from 'next/navigation';
 
 interface DataTableProps<TData, TValue> {
+  route: string;
+  btnLabel: string;
   filter: string;
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
 export function DataTable<TData, TValue>({
+  route,
+  btnLabel,
   filter,
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const router = useRouter();
   const table = useReactTable({
     data,
     columns,
@@ -59,8 +65,11 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-        <Button className="flex items-center gap-2">
-          <CirclePlus size={20} /> <span>Add Category</span>
+        <Button
+          onClick={() => router.push(`${route}`)}
+          className="flex items-center gap-2"
+        >
+          <CirclePlus size={20} /> <span>Add {btnLabel}</span>
         </Button>
       </div>
       <div className="rounded-md border">

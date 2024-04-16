@@ -37,3 +37,9 @@ export const profileFormSchema = z.object({
     .email({ message: 'Email is not valid' }),
   image: z.any(),
 });
+
+export const categoryFormSchema = z.object({
+  category: z
+    .string({ required_error: 'Category is required' })
+    .min(3, { message: 'Category must be at least 3 characters' }),
+});

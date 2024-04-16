@@ -28,3 +28,8 @@ enum IsActive {
   active
   nonactive
 }
+
+model Category {
+  id       String @id @default(cuid())
+  category String
+}

@@ -91,7 +91,13 @@ const CategoryPage = async () => {
 
   return (
     <div className="container max-w-xl mt-3 mx-auto">
-      <DataTable filter="category" columns={CategoryColumns} data={data} />
+      <DataTable
+        filter="category"
+        btnLabel="Add Category"
+        route="/category/create"
+        columns={CategoryColumns}
+        data={data}
+      />
     </div>
   );
 };

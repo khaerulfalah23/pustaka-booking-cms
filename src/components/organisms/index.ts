@@ -5,3 +5,4 @@ export * from './Sheet';
 export * from './Profile';
 export * from './ProfileForm';
 export * from './DataTable';
+export * from './CategoryForm';
