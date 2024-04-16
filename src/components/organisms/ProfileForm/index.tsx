@@ -30,9 +30,9 @@ export const ProfileForm: FC<ProfileFormProps> = ({ detail }) => {
   const form = useForm<z.infer<typeof profileFormSchema>>({
     resolver: zodResolver(profileFormSchema),
     defaultValues: {
-      name: detail?.name,
-      email: detail?.email,
-      image: detail?.image,
+      name: detail?.name || '',
+      email: detail?.email || '',
+      image: detail?.image || '',
     },
   });
 
