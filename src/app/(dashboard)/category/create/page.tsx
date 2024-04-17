@@ -31,6 +31,7 @@ const CreateCategoryPage = () => {
         id: loadingToast,
       });
       router.push('/category');
+      router.refresh();
     } catch (error) {
       toast.error('Something went wrong', {
         id: loadingToast,

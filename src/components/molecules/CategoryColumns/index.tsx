@@ -1,10 +1,11 @@
 'use client';
 
 import { Button } from '@/components/atoms';
+import { DeleteCategory } from '@/components/organisms';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, Pencil, Trash2 } from 'lucide-react';
 
-export type Category = {
+type Category = {
   id: string;
   category: string;
 };
@@ -44,15 +45,13 @@ export const CategoryColumns: ColumnDef<Category>[] = [
     id: 'actions',
     header: () => <span className="flex justify-center">Actions</span>,
     cell: ({ row }) => {
-      const payment = row.original;
+      const categoryId = row.original.id;
       return (
         <div className="flex items-center justify-center gap-2">
           <Button size={'sm'}>
             <Pencil size={20} />
           </Button>
-          <Button size={'sm'} variant={'destructive'}>
-            <Trash2 size={20} />
-          </Button>
+          <DeleteCategory categoryId={categoryId} />
         </div>
       );
     },

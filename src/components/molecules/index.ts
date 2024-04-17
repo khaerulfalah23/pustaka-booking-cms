@@ -9,3 +9,4 @@ export * from './Logout';
 export * from './Table';
 export * from './DataTablePagination';
 export * from './CategoryColumns';
+export * from './AlertDialog';

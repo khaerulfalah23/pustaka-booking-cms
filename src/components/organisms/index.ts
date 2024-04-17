@@ -6,3 +6,4 @@ export * from './Profile';
 export * from './ProfileForm';
 export * from './DataTable';
 export * from './CategoryForm';
+export * from './DeleteCategory';
