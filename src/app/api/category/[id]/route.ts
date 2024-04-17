@@ -12,3 +12,18 @@ export async function DELETE(
   });
   return NextResponse.json(result);
 }
+
+export async function PUT(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  const data = await request.json();
+  const result = await prisma.category.update({
+    where: {
+      id: params.id,
+    },
+    data,
+  });
+
+  return NextResponse.json(result);
+}

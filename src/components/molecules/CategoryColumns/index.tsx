@@ -3,7 +3,8 @@
 import { Button } from '@/components/atoms';
 import { DeleteCategory } from '@/components/organisms';
 import { ColumnDef } from '@tanstack/react-table';
-import { ArrowUpDown, Pencil, Trash2 } from 'lucide-react';
+import { ArrowUpDown, Pencil } from 'lucide-react';
+import Link from 'next/link';
 
 type Category = {
   id: string;
@@ -48,9 +49,11 @@ export const CategoryColumns: ColumnDef<Category>[] = [
       const categoryId = row.original.id;
       return (
         <div className="flex items-center justify-center gap-2">
-          <Button size={'sm'}>
-            <Pencil size={20} />
-          </Button>
+          <Link href={`/category/edit/${categoryId}`}>
+            <Button size={'sm'}>
+              <Pencil size={20} />
+            </Button>
+          </Link>
           <DeleteCategory categoryId={categoryId} />
         </div>
       );
