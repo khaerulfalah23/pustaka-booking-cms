@@ -5,6 +5,6 @@ export * from './Sheet';
 export * from './Profile';
 export * from './ProfileForm';
 export * from './DataTable';
-export * from './CategoryForm';
+export * from './AddCategoryForm';
 export * from './DeleteCategory';
 export * from './EditCategoryForm';
