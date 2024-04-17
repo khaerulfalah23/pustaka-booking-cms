@@ -21,11 +21,18 @@ const CreateCategoryPage = () => {
         category: val.category,
       };
 
-      await fetch('/api/category', {
+      const res = await fetch('/api/category', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
+
+      if (!res.ok) {
+        toast.error('Category already exist', {
+          id: loadingToast,
+        });
+        return;
+      }
 
       toast.success('Add category success', {
         id: loadingToast,
